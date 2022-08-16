@@ -1,0 +1,159 @@
+{
+  "components": {
+    "schemas": {
+      "Todo": {
+        "properties": {
+          "content": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "createdBy": {
+            "type": "string"
+          }
+        },
+        "type": "object",
+        "required": [
+          "content",
+          "id",
+          "createdBy"
+        ]
+      },
+      "TodoNewRequest": {
+        "properties": {
+          "content": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
+          }
+        },
+        "type": "object",
+        "required": [
+          "content",
+          "id"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/ping": {
+      "get": {
+        "operationId": "RootController.ping",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Ping",
+        "tags": [
+          "Root"
+        ]
+      }
+    },
+    "/tag": {
+      "get": {
+        "operationId": "RootController.tag",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Tag",
+        "tags": [
+          "Root"
+        ]
+      }
+    },
+    "/todo/{id}": {
+      "get": {
+        "operationId": "TodoController.getOne",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Todo"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "Get one",
+        "tags": [
+          "Todo"
+        ]
+      }
+    },
+    "/todo/": {
+      "get": {
+        "operationId": "TodoController.getAll",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Get all",
+        "tags": [
+          "Todo"
+        ]
+      },
+      "post": {
+        "operationId": "TodoController.post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TodoNewRequest"
+              }
+            }
+          },
+          "description": "TodoNewRequest",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Post",
+        "tags": [
+          "Todo"
+        ]
+      }
+    }
+  }
+}
